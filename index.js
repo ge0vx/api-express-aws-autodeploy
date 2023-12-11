@@ -22,13 +22,13 @@ app.use(express.json());
 // Routes
 app.use("/api/users", (req, res)=>{
   return res.status(200).json({
-    message: 'hello g2'
+    message: 'hello g3'
   })
 });
 
-app.use("/api/products", (req, res) => {
+app.use("/api/test", (req, res) => {
   return res.status(200).json({
-    message: 'This is new feature change, a new route for products'
+    message: 'This is new feature change, a new route for test'
   })
 });
 
