@@ -1,3 +1,4 @@
+import { NotFound } from "http-errors";
 import { Request, Response, NextFunction } from "express";
 import SpotifyService from "./spotify.service";
 import  dotenv from 'dotenv';
@@ -12,16 +13,25 @@ export class SpotifyController {
     }
     
     async searchByTitle(req: Request, res: Response, next: NextFunction): Promise<void> {
-        const { trackTitle } = req.params;
-        const response = await this.spotifyService.searchByTitle(trackTitle)
-        res.status(200).json(response);
+        try{
+            const { trackTitle } = req.params;
+            const response = await this.spotifyService.searchByTitle(trackTitle);
+            res.status(200).json(response);
+        }catch(error){
+            next(error);
+        }
     }
 
     async searchById(req: Request, res: Response, next: NextFunction
     ): Promise<void> {
-        const { trackId } = req.params;
-        const response = await this.spotifyService.searchById(trackId)
-        res.status(200).json(response);
+        try{
+            const { trackId } = req.params;
+            const response = await this.spotifyService.searchById(trackId)
+            if (response instanceof Error) throw new NotFound("Track does not exist!") 
+            res.status(200).json(response);
+        }catch(error){
+            next(error);
+        }
     }
 
 }
