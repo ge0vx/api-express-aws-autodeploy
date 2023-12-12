@@ -1,15 +1,18 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, CreateDateColumn } from "typeorm";
 
 @Entity()
 export class Track {
-    @PrimaryGeneratedColumn()
-    id!: number;
+    @PrimaryColumn()
+    id!: string;
+
+    @Column()
+    isrc!: string;
 
     @Column()
     title!: string;
 
     @Column()
-    description!: string;
+    uri!: string;
 
     @CreateDateColumn()
     createdAt!: Date;
