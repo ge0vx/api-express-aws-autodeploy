@@ -1,10 +1,15 @@
 import {Router} from 'express';
-const router = Router();
+import { TrackController } from "./track.controller";
+import { TrackRepository } from "./track.repository";
 
-router.get("/tracks", (req, res, next)=>{
-    return res.status(200).json({
-        message: `testing!!! ${process.env.PORT}`
-    })
-})
+const router = Router();
+const controller = new TrackController(
+    new TrackRepository()
+);
+
+router.post("/tracks", controller.create)
+router.get("/tracks", controller.list);
+router.get("/tracks/:isrcId", controller.get);
+
 
 export default router;
