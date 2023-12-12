@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import { Router } from 'express';
 import { TrackController } from "./track.controller";
 import { TrackRepository } from "./track.repository";
 
