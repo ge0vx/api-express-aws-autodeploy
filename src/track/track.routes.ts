@@ -7,9 +7,8 @@ const controller = new TrackController(
     new TrackRepository()
 );
 
-router.post("/tracks", controller.create)
-router.get("/tracks", controller.list);
-router.get("/tracks/:isrcId", controller.get);
-
+router.post("/tracks", controller.create.bind(controller));
+router.get("/tracks", controller.list.bind(controller));
+router.get("/tracks/:isrcId", controller.get.bind(controller));
 
 export default router;

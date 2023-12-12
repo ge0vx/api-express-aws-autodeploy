@@ -7,16 +7,14 @@ dotenv.config();
 
 const port = process.env.PORT || 5000;
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
 
 database.initialize()
     .then(()=> console.log("Database connnected!"))
     .catch(console.error)
 
-app.use('/api', (req, res)=>{
-    return res.status(200).json({
-        message: 'This is new feature change, a new route for products'
-    })
-})
+app.use('/api', TrackRoutes)
 
 
 app.listen(port, ()=>{
