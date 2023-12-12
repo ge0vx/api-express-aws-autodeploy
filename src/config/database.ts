@@ -12,5 +12,5 @@ export default new DataSource({
     database: process.env.DB_NAME,
     entities: [Track],
     synchronize: true,
-    logging: false,  
+    logging: false,
 });
