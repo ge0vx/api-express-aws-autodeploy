@@ -8,9 +8,9 @@ dotenv.config();
 const port = process.env.PORT || 5000;
 const app = express();
 
-// database.initialize()
-//     .then(()=> console.log("Database connnected!"))
-//     .catch(console.error)
+database.initialize()
+    .then(()=> console.log("Database connnected!"))
+    .catch(console.error)
 
 app.use('/api', (req, res)=>{
     return res.status(200).json({
