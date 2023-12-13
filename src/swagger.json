@@ -21,8 +21,8 @@
     ],
     "tags": [
         {
-            "name": "Cats",
-            "description": "API for cats in the system"
+            "name": "Spotify Tracks",
+            "description": "API searches and saves Spotify Tracks"
         }
     ],
     "consumes": [
@@ -33,20 +33,11 @@
     ],
     "paths": {
         "/searchByTitle/{trackTitle}": {
-            "parameters": [
-                {
-                    "name": "trackTitle",
-                    "in": "path",
-                    "required": true,
-                    "description": "Title of the track that we want to match",
-                    "type": "string"
-                }
-            ],
             "get": {
                 "tags": [
-                    "Tracks"
+                    "Retrieve spotify tracks from spotify API"
                 ],
-                "summary": "Get Track with given Title",
+                "summary": "Get track with given Title",
                 "parameters": [
                     {
                         "in": "path",
@@ -62,6 +53,129 @@
                     "404": {
                         "description": "Failed. Track not found."
                     }
+                }
+            }
+        },
+        "/searchById/{trackId}": {
+            "get": {
+                "tags": [
+                    "Retrieve spotify tracks from spotify API"
+                ],
+                "summary": "Get track with given track id",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "trackId",
+                        "required": true,
+                        "description": "Track title"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Failed. Track not found."
+                    }
+                }
+            }
+        },
+        "/track": {
+            "post": {
+                "tags": ["Retrieve data from System DB"],
+                "summary": "Create a new track in system",
+                "requestBody": {
+                    "description": "Track Id",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/id"
+                            }
+                        }
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Retrieve data from System DB"
+                ],
+                "summary": "List saved tracks from system",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Failed. Track not found."
+                    }
+                }
+            }
+        },
+        "/track/{id}": {
+            "get": {
+                "tags": [
+                    "Retrieve data from System DB"
+                ],
+                "summary": "Get saved tracks by id",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "Track Id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Failed. Track not found."
+                    }
+                }
+            }
+        },
+        "/tracksByArtist/{artist}": {
+            "get": {
+                "tags": [
+                    "Retrieve data from System DB"
+                ],
+                "summary": "Get saved tracks by artist name",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "artist",
+                        "required": true,
+                        "description": "Artist Name"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Failed. Track not found."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "id": {
+            "properties": {
+                "id": {
+                    "type": "string"
                 }
             }
         }
