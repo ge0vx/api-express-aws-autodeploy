@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import { DatabaseRepository } from "./declarations";
 import SpotifyService from "../spotify/spotify.service";
 import { Track } from "../entity/Track";
+import { Artist } from "../entity/Artist";
 
 export class TrackController {
 
@@ -18,10 +19,18 @@ export class TrackController {
             if (!id) throw new BadRequest("Missing parameter Id");
             const reponseTrack = await this.spotifyService.searchById(id);
             if (reponseTrack instanceof Error) throw new NotFound("Track does not exist!");
+
+            const artists: Artist[] = reponseTrack?.artist?.map((item : any)=>{
+                const entity = new Artist()
+                entity.artist = item;
+                return entity;
+            })
+
             const track = await this.repository.create({
                 ...reponseTrack,
                 title: reponseTrack.name,
-                uri: reponseTrack.image
+                uri: reponseTrack.image,
+                artists: artists
             })
             res.status(200).json(track);
         }catch(error){
