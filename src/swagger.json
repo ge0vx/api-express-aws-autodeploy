@@ -82,7 +82,9 @@
         },
         "/track": {
             "post": {
-                "tags": ["Retrieve data from System DB"],
+                "tags": [
+                    "Retrieve data from System DB"
+                ],
                 "summary": "Create a new track in system",
                 "requestBody": {
                     "description": "Track Id",
