@@ -19,7 +19,7 @@ database.initialize()
 
 app.use('/api', TrackRoutes)
 app.use('/api', SpotifyRoutes)
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));    
+app.use('/api/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));    
 
 
 app.listen(port, ()=>{
