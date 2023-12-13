@@ -11,12 +11,12 @@
     },
     "servers": [
         {
-            "url": "http://localhost:5000/api/",
-            "description": "Local Dev"
-        },
-        {
             "url": "http://3.101.141.231/api/",
             "description": "Prod AWS ec2 instance with nginx proxy"
+        },
+        {
+            "url": "http://localhost:5000/api/",
+            "description": "Local Dev"
         }
     ],
     "tags": [
