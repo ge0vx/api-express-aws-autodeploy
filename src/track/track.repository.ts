@@ -23,8 +23,10 @@ export class TrackRepository implements DatabaseRepository<Track>{
 
     async searchByArtist(artist: Artist, query?: Query | undefined): Promise<Track[]> {
         const repository = database.getRepository(Track);
-        const tracks = await repository.createQueryBuilder("track").where("track.title like :artist", { artist:`%${artist}%` })
-        .getMany();
+        const tracks = await repository.createQueryBuilder("track")
+            .innerJoinAndSelect('track.artists', 'artists')
+            .where("artists.artist like :artist", { artist:`%${artist}%` })
+            .getMany();
         return tracks;
     }
     
