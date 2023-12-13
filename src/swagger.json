@@ -8,5 +8,62 @@
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"
         }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5000/api/",
+            "description": "Local Dev"
+        },
+        {
+            "url": "http://3.101.141.231/api/",
+            "description": "Prod AWS ec2 instance with nginx proxy"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Cats",
+            "description": "API for cats in the system"
+        }
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/searchByTitle/{trackTitle}": {
+            "parameters": [
+                {
+                    "name": "trackTitle",
+                    "in": "path",
+                    "required": true,
+                    "description": "Title of the track that we want to match",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Tracks"
+                ],
+                "summary": "Get Track with given Title",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "trackTitle",
+                        "required": true,
+                        "description": "Track title"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Failed. Track not found."
+                    }
+                }
+            }
+        }
     }
 }
