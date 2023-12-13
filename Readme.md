@@ -1,5 +1,7 @@
 ## Getting Started
 
+express API with typeORM, Mysql and node 18.x 
+
 ## Quick Start for develoment mode only
 
   Install dependencies:
@@ -41,5 +43,7 @@ Before running the server you must:
 $ npm run dev
 ```
 
-Author: Giovany Perez, geovanypeb@outlook.com
 
+
+
+Author: Giovany Perez, geovanypeb@outlook.com
